@@ -1,0 +1,42 @@
+Proposed Problem: Scholarship Score Calculation Engine
+
+Overview:
+This project involves developing a PL/SQL solution to process and calculate scholarship scores for teacher applications. The objective is to create a robust, transparent, and automated scoring engine that evaluates applicants based on multiple business rules.
+
+Business Rules:
+1. Experience Score:
+   - Calculate the score based on the number of years the applicant has been working in the public education sector.
+   - When an applicant has multiple employment records, use the earliest contract date to determine total years of experience.
+   - Retrieve the corresponding score from the "PTJE_ANNOS_EXPERIENCIA" table.
+
+2. Country Score:
+   - Determine the score based on the country of the institution offering the program to which the applicant is applying.
+   - Retrieve the corresponding score from the "PTJE_PAIS_POSTULA" table.
+
+3. Additional Score:
+   - For applicants working in multiple establishments and accumulating over 30 hours per week, calculate an extra score.
+   - Compute this extra score as a parameterized percentage (e.g., 35%) of the sum of the Experience Score and the Country Score.
+
+Processing Requirements:
+- All scores must be computed using SELECT statements and rounded appropriately.
+- Before processing new data, truncate the following tables: DETALLE_PUNTAJE_POSTULACION, ERROR_PROCESO, and RESULTADO_POSTULACION.
+- Implement comprehensive error handling: any error during score computation must be logged into the ERROR_PROCESO table with a clear message.
+
+Implementation Details:
+- Create a PL/SQL package that includes:
+   - Public functions (constructors) for calculating the additional score.
+   - A public variable to store the calculated additional score.
+- Develop two standalone stored functions (outside the package) for computing the Experience Score and the Country Score, respectively, each incorporating error handling.
+- Build a main stored procedure that:
+   - Processes all scholarship applicants.
+   - Accepts the extra score percentage as an input parameter.
+   - Generates detailed score entries in the DETALLE_PUNTAJE_POSTULACION table.
+- Implement a trigger that automatically populates the RESULTADO_POSTULACION table upon insertion into DETALLE_PUNTAJE_POSTULACION. The trigger must:
+   - Compute the final score as the sum of the Experience Score, Country Score, and Additional Score.
+   - Mark the applicant as "SELECCIONADO" if the final score is equal to or exceeds 2500, otherwise mark as "NO SELECCIONADO".
+
+Technical Environment:
+- The solution should be developed using Oracle SQL Developer.
+- It is targeted for Oracle Database XE 21c or Oracle Cloud environments.
+
+This document outlines the core problem and requirements that the PL/SQL solution must address, ensuring an efficient and transparent scoring system for teacher scholarship applications.
