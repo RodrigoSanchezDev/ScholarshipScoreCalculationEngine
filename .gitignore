@@ -1,0 +1,33 @@
+# .gitignore for Scholarship Score Calculation Engine
+# Author: Rodrigo Sanchez - sanchezdev.com
+
+# System Files (macOS)
+.DS_Store
+
+# System Files (Windows)
+Thumbs.db
+Desktop.ini
+
+# Temporary Files and Logs
+*.log
+*.tmp
+*.bak
+*~
+
+# Editor Swap/Backup Files
+*.swp
+
+# Oracle SQL Developer and Database Dumps
+*.dmp
+*.dat
+*.ddl
+
+# IDE and Editor Configurations
+.vscode/
+.idea/
+*.iml
+*.ipr
+*.iws
+
+# Other temporary files
+*.cache
